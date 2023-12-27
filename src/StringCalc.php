@@ -7,4 +7,8 @@ namespace Kata;
  * 
  */
 final class StringCalc {
+
+  public function add(string $string): int {
+    return 0;
+  }
 }
