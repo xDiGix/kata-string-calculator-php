@@ -70,4 +70,16 @@ final class StringCalcTest extends TestCase {
 
     $sum = $stringCalc->add('-1');
   }
+
+  public function testSumIgnoreNumbersBiggerThan1000String(): void {
+    $stringCalc = new StringCalc();
+    $sum = $stringCalc->add('2,1001');
+    $this->assertSame(2, $sum);
+  }
+
+  public function testSumNumbers1000String(): void {
+    $stringCalc = new StringCalc();
+    $sum = $stringCalc->add('2,1000');
+    $this->assertSame(1002, $sum);
+  }
 }

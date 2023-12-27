@@ -9,10 +9,10 @@ namespace Kata;
 final class StringCalc {
 
   private $delimiter = '(,|\n|\\\n)';
+  private $maxNumber = 1000;
 
   public function add(string $string): int {
     $sum = 0;
-    
 
     if ($string === '') {
       return $sum;
@@ -26,6 +26,7 @@ final class StringCalc {
     $numbers = array_map('intval', $numbers);
     
     $this->validateNumbers($numbers);
+    $numbers = $this->removeIgnoreNumbers($numbers);
 
     $sum = array_sum($numbers);
     
@@ -50,5 +51,11 @@ final class StringCalc {
     if (!empty($negativeNumbers)) {
       throw new \InvalidArgumentException('Negatives not allowed: ' . implode(', ', $negativeNumbers));
     }
+  }
+
+  private function removeIgnoreNumbers(array $numbers): array {
+    return array_filter($numbers, function ($number) {
+      return $number <= $this->maxNumber;
+    });
   }
 }
