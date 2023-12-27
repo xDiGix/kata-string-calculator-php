@@ -61,4 +61,13 @@ final class StringCalcTest extends TestCase {
     $sum = $stringCalc->add('//;;\n1;;2');
     $this->assertSame(3, $sum);
   }
+
+  public function testSumWithOneNegativeString(): void {
+    $stringCalc = new StringCalc();
+
+    $this->expectException(\InvalidArgumentException::class);
+    $this->expectExceptionMessage('Negatives not allowed: -1');
+
+    $sum = $stringCalc->add('-1');
+  }
 }
