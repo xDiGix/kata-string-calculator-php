@@ -20,24 +20,11 @@ final class StringCalcTest extends TestCase {
     $this->assertSame(0, $sum);
   }
 
-  public function testSumOneString(): void {
-    $sum = $this->stringCalc->add('1');
-    $this->assertSame(1, $sum);
-  }
-
-  public function testSumOneTwoString(): void {
-    $sum = $this->stringCalc->add('1,2');
-    $this->assertSame(3, $sum);
-  }
-
-  public function testSumFiveOneString(): void {
-    $sum = $this->stringCalc->add('5,1');
-    $this->assertSame(6, $sum);
-  }
-
-  public function testSumThreeFiveOneString(): void {
-    $sum = $this->stringCalc->add('3,5,1');
-    $this->assertSame(9, $sum);
+  /**
+   * @dataProvider sumStringDataProvider
+   */
+  public function testSumString(string $string, int $sum): void {
+    $this->assertSame($sum, $this->stringCalc->add($string));
   }
 
   public function testSumWithDifferentSeparetorString(): void {
@@ -73,13 +60,19 @@ final class StringCalcTest extends TestCase {
     $this->assertSame(2, $sum);
   }
 
-  public function testSumNumbers1000String(): void {
-    $sum = $this->stringCalc->add('2,1000');
-    $this->assertSame(1002, $sum);
-  }
-
   public function testSumWithPassedMultipleDelimiterFormatString(): void {
     $sum = $this->stringCalc->add('//[***]\n1***2***3');
     $this->assertSame(6, $sum);
+  }
+
+  public static function sumStringDataProvider(): array {
+    return [
+      ['1', 1],
+      ['1,2', 3],
+      ['1,2,3', 6],
+      ['5,1', 6],
+      ['3,5,1', 9],
+      ['2,1000', 1002],
+    ];
   }
 }
