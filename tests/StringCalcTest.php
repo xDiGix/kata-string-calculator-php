@@ -25,4 +25,28 @@ final class StringCalcTest extends TestCase {
     $sum = $stringCalc->add('1,2');
     $this->assertSame(3, $sum);
   }
+
+  public function testSumFiveOneString(): void {
+    $stringCalc = new StringCalc();
+    $sum = $stringCalc->add('5,1');
+    $this->assertSame(6, $sum);
+  }
+
+  public function testSumThreeFiveOneString(): void {
+    $stringCalc = new StringCalc();
+    $sum = $stringCalc->add('3,5,1');
+    $this->assertSame(9, $sum);
+  }
+
+  public function testSumWithDifferentSeparetorString(): void {
+    $stringCalc = new StringCalc();
+    $sum = $stringCalc->add('1\n2,3');
+    $this->assertSame(6, $sum);
+  }
+
+  public function testSumWithDifferentSeparetorDoubleQuoteString(): void {
+    $stringCalc = new StringCalc();
+    $sum = $stringCalc->add("1\n2,3");
+    $this->assertSame(6, $sum);
+  }
 }

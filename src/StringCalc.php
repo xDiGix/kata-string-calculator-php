@@ -15,8 +15,7 @@ final class StringCalc {
       return $sum;
     }
 
-    $numbers = explode(',', $string);
-    
+    $numbers = preg_split('/(,|\n|\\\n)/', $string);
     $numbers = array_map('intval', $numbers);
     $sum = array_sum($numbers);
     
