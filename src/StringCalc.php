@@ -25,12 +25,7 @@ final class StringCalc {
     $numbers = preg_split('/' . $delimiter . '/', $string);
     $numbers = array_map('intval', $numbers);
     
-    $negativeNumbers = array_filter($numbers, function ($number) {
-      return $number < 0;
-    });
-    if (!empty($negativeNumbers)) {
-      throw new \InvalidArgumentException('Negatives not allowed: ' . implode(', ', $negativeNumbers));
-    }
+    $this->validateNumbers($numbers);
 
     $sum = array_sum($numbers);
     
@@ -46,5 +41,14 @@ final class StringCalc {
     $this->delimiter = substr($delimiterFormat, 2);
 
     return $string;
+  }
+
+  private function validateNumbers(array $numbers): void {
+    $negativeNumbers = array_filter($numbers, function ($number) {
+      return $number < 0;
+    });
+    if (!empty($negativeNumbers)) {
+      throw new \InvalidArgumentException('Negatives not allowed: ' . implode(', ', $negativeNumbers));
+    }
   }
 }
