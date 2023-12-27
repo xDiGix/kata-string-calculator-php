@@ -18,3 +18,5 @@ https://kata-log.rocks/string-calculator-kata
    - [x] "-1" = exception "Negatives not allowed: -1"
 6. Step 6
    - [x] "2 + 1001" = 2 (Numbers bigger than 1000 should be ignored)
+7. Step 7
+   - [x] "//[***]\n1***2***3" = 6 (format "//[delimiter]\n")
