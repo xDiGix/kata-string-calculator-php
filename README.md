@@ -6,4 +6,4 @@ https://kata-log.rocks/string-calculator-kata
 
 - [x] "" = 0
 - [x] "1" = 1
-- [ ] "1,2" = 3
+- [x] "1,2" = 3

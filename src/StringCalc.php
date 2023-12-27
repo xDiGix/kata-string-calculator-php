@@ -9,9 +9,17 @@ namespace Kata;
 final class StringCalc {
 
   public function add(string $string): int {
-    if ($string === '1') {
-      return 1;
+    $sum = 0;
+
+    if ($string === '') {
+      return $sum;
     }
-    return 0;
+
+    $numbers = explode(',', $string);
+    
+    $numbers = array_map('intval', $numbers);
+    $sum = array_sum($numbers);
+    
+    return $sum;
   }
 }

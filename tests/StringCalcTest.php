@@ -19,4 +19,10 @@ final class StringCalcTest extends TestCase {
     $sum = $stringCalc->add('1');
     $this->assertSame(1, $sum);
   }
+
+  public function testSumOneTwoString(): void {
+    $stringCalc = new StringCalc();
+    $sum = $stringCalc->add('1,2');
+    $this->assertSame(3, $sum);
+  }
 }
