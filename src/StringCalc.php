@@ -28,7 +28,10 @@ final class StringCalc {
     $string = $this->handleDelimiterFormat($string);
 
     $delimiter = $this->delimiter;
+
+    // extract numbers
     $numbers = preg_split('/' . $delimiter . '/', $string);
+    // map numbers to int
     $numbers = array_map('intval', $numbers);
     
     $this->validateNumbers($numbers);
@@ -40,7 +43,7 @@ final class StringCalc {
   }
 
   /**
-   * Method to handle delimiter formats like '//;\n1;2' and '//[***]\n1***2***3'
+   * Method to handle delimiter formats like '//;\n1;2' and '//[***]\n1***2***3' and '//[*][%]\n1*2%3'
    *  
    * @param string $string
    * @return string
@@ -50,14 +53,19 @@ final class StringCalc {
       return $string;
     }
 
+    // extract delimiter format and string
     list($delimiterFormat, $string) = preg_split('/(\n|\\\n)/', $string);
+    // remove delimiter format
     $delimiter = substr($delimiterFormat, 2);
-    preg_match('/\[(.*)\]/', $delimiter, $matches);
+    // extract delimiters
+    preg_match_all('/\[(.+?)\]/', $delimiter, $matches);
     if (!empty($matches[1])) {
-      $delimiter = $matches[1];
+      // fix delimiter for regex
+      $delimiter = array_map('preg_quote', $matches[1]);
+      $delimiter = implode('|', $delimiter);
     }
-    $this->delimiter = preg_quote($delimiter);
-
+    $this->delimiter = $delimiter;
+    
     return $string;
   }
 

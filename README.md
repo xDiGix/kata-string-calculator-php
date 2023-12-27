@@ -20,3 +20,5 @@ https://kata-log.rocks/string-calculator-kata
    - [x] "2 + 1001" = 2 (Numbers bigger than 1000 should be ignored)
 7. Step 7
    - [x] "//[***]\n1***2***3" = 6 (format "//[delimiter]\n")
+8. Step 8
+   - [x] "//[*][%]\n1*2%3" = 6 (format //[delim1][delim2]\n)
