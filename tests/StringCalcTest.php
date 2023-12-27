@@ -70,6 +70,11 @@ final class StringCalcTest extends TestCase {
     $this->assertSame(6, $sum);
   }
 
+  public function testSumWithPassedMultipleAndAnyLengthDelimiterFormatString(): void {
+    $sum = $this->stringCalc->add('//[***][%%]\n3***3%%3');
+    $this->assertSame(9, $sum);
+  }
+
   public static function sumStringDataProvider(): array {
     return [
       ['1', 1],
