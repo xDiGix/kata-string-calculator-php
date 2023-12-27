@@ -9,6 +9,9 @@ namespace Kata;
 final class StringCalc {
 
   public function add(string $string): int {
+    if ($string === '1') {
+      return 1;
+    }
     return 0;
   }
 }

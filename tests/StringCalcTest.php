@@ -10,6 +10,13 @@ use Kata\StringCalc;
 final class StringCalcTest extends TestCase {
   public function testSumEmptyString(): void {
     $stringCalc = new StringCalc();
-    $this->assertEquals(0, $stringCalc->add(''));
+    $sum = $stringCalc->add('');
+    $this->assertSame(0, $sum);
+  }
+
+  public function testSumOneString(): void {
+    $stringCalc = new StringCalc();
+    $sum = $stringCalc->add('1');
+    $this->assertSame(1, $sum);
   }
 }
