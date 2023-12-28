@@ -1,4 +1,4 @@
-# String Calculator Kata
+# String Calculator Kata in PHP
 
 https://kata-log.rocks/string-calculator-kata
 
