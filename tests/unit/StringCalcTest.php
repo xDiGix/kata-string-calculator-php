@@ -15,39 +15,58 @@ final class StringCalcTest extends TestCase {
     $this->stringCalc = new StringCalc();
   }
 
-  public function testSumEmptyString(): void {
+  /**
+   * @test
+   */
+  public function getZeroWithEmptyString(): void {
     $sum = $this->stringCalc->add('');
     $this->assertSame(0, $sum);
   }
 
   /**
+   * @test
    * @dataProvider sumStringDataProvider
    */
-  public function testSumString(string $string, int $sum): void {
+  public function getCorrectSumWithCommaDelimiter(string $string, int $sum): void {
     $this->assertSame($sum, $this->stringCalc->add($string));
   }
 
-  public function testSumWithDifferentSeparetorString(): void {
+  /**
+   * @test
+   */
+  public function getCorrectSumWithNewLineAndCommaDelimiter(): void {
     $sum = $this->stringCalc->add('1\n2,3');
     $this->assertSame(6, $sum);
   }
 
-  public function testSumWithDifferentSeparetorDoubleQuoteString(): void {
+  /**
+   * @test
+   */
+  public function getCorrectSumWithNewLineAndCommaDelimiterBetweenDoubleQuotes(): void {
     $sum = $this->stringCalc->add("1\n2,3");
     $this->assertSame(6, $sum);
   }
 
-  public function testSumWithPassedDelimiterFormatString(): void {
+  /**
+   * @test
+   */
+  public function getCorrectSumWithPassedDelimiterFormat(): void {
     $sum = $this->stringCalc->add("//;\n1;2");
     $this->assertSame(3, $sum);
   }
 
-  public function testSumWithPassedDelimiterFormatTwoCharString(): void {
+  /**
+   * @test
+   */
+  public function getCorrectSumWithPassedDelimiterFormatOfTwoCharacters(): void {
     $sum = $this->stringCalc->add('//;;\n1;;2');
     $this->assertSame(3, $sum);
   }
 
-  public function testSumWithOneNegativeString(): void {
+  /**
+   * @test
+   */
+  public function failsWithNegativeNumbers(): void {
 
     $this->expectException(\InvalidArgumentException::class);
     $this->expectExceptionMessage('Negatives not allowed: -1');
@@ -55,22 +74,34 @@ final class StringCalcTest extends TestCase {
     $sum = $this->stringCalc->add('-1');
   }
 
-  public function testSumIgnoreNumbersBiggerThan1000String(): void {
+  /**
+   * @test
+   */
+  public function IgnoreNumberBiggerThan1000(): void {
     $sum = $this->stringCalc->add('2,1001');
     $this->assertSame(2, $sum);
   }
 
-  public function testSumWithPassedAnyLengthDelimiterFormatString(): void {
+  /**
+   * @test
+   */
+  public function getCorrectSumWithPassedDelimiterFormatOfAnyLength(): void {
     $sum = $this->stringCalc->add('//[***]\n1***2***3');
     $this->assertSame(6, $sum);
   }
 
-  public function testSumWithPassedMultipleDelimiterFormatString(): void {
+  /**
+   * @test
+   */
+  public function getCorrectSumWithPassedMultipleDelimiterFormat(): void {
     $sum = $this->stringCalc->add('//[*][%]\n1*2%3');
     $this->assertSame(6, $sum);
   }
 
-  public function testSumWithPassedMultipleAndAnyLengthDelimiterFormatString(): void {
+  /**
+   * @test
+   */
+  public function getCorrectSumWithPassedMultipleAndAnyLengthDelimiterFormat(): void {
     $sum = $this->stringCalc->add('//[***][%%]\n3***3%%3');
     $this->assertSame(9, $sum);
   }
