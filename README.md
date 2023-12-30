@@ -2,6 +2,23 @@
 
 https://kata-log.rocks/string-calculator-kata
 
+## Instructions:
+To execute the project, build a custom Docker image with PHP 8.2 and xDebug enabled.
+```
+FROM php:8.2-cli
+
+# Install Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+```
+
+After running the commands:
+
+```
+$ make test
+$ make coverage
+```
+
 ## TEST:
 
 1. Step 1
